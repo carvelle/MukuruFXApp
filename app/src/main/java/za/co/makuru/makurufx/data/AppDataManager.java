@@ -55,6 +55,11 @@ public class AppDataManager implements DataManager {
     }
 
     @Override
+    public Observable<Boolean> deletePersistedRate(PersistRate persistRate) {
+        return mDatabaseHelper.deletePersistedRate(persistRate);
+    }
+
+    @Override
     public Single<CurrencyListResponse> getAllCurrencies(CurrencyListRequest request, String path) {
         return mServiceHelper.getAllCurrencies(request,path);
     }

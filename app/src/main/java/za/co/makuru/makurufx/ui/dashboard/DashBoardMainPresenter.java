@@ -11,6 +11,7 @@ import io.reactivex.disposables.CompositeDisposable;
 import za.co.makuru.makurufx.configuration.Configuration;
 import za.co.makuru.makurufx.data.DataManager;
 import za.co.makuru.makurufx.data.db.model.Currency;
+import za.co.makuru.makurufx.data.db.model.PersistRate;
 import za.co.makuru.makurufx.data.network.error.CustomError;
 import za.co.makuru.makurufx.data.network.model.request.LatestRequest;
 import za.co.makuru.makurufx.ui.base.BasePresenter;
@@ -36,6 +37,13 @@ public class DashBoardMainPresenter<V extends DashboardView> extends BasePresent
             .observeOn(getSchedulerProvider().ui())
             .subscribe((didDelete) ->{
 
+                List<PersistRate> persistRates = currency.getPersistRateList();
+                List<PersistRate> itemsToRmove = persistRates;
+                for(PersistRate ps : persistRates)
+                {
+                    deleteRate(ps);
+                }
+                persistRates.removeAll(itemsToRmove);
                 if (!isViewAttached()) {
                     return;
                 }
@@ -55,6 +63,19 @@ public class DashBoardMainPresenter<V extends DashboardView> extends BasePresent
                 }
                 getLatest(saved);
             }));
+    }
+
+    @Override
+    public void deleteRate(PersistRate rate) {
+        getCompositeDisposable().add(getDataManager()
+                .deletePersistedRate(rate)
+                .subscribeOn(getSchedulerProvider().io())
+                .observeOn(getSchedulerProvider().ui())
+                .subscribe((saved) -> {
+                    if (!isViewAttached()) {
+                        return;
+                    }
+                }));
     }
 
     @Override

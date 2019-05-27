@@ -60,4 +60,12 @@ public class AppDatabaseHelper implements DatabaseHelper {
         mDaoSession.insert(persistRate);
         return true;
     }
+
+    @Override
+    public Observable<Boolean> deletePersistedRate(PersistRate persistRate) {
+        return Observable.fromCallable(() -> {
+            mDaoSession.delete(persistRate);
+            return true;
+        });
+    }
 }

@@ -14,6 +14,7 @@ public interface DatabaseHelper {
     Observable<List<Currency>> getAllCurrencies();
     Observable<Boolean> updateAllCurrencies(List<Currency> currencyList);
     boolean addPersistedRate(PersistRate persistRate);
+    Observable<Boolean> deletePersistedRate(PersistRate persistRate);
 
 
 }
