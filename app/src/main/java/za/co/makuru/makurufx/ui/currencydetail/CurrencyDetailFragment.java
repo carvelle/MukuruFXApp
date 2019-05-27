@@ -3,6 +3,7 @@ package za.co.makuru.makurufx.ui.currencydetail;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,6 +22,7 @@ import za.co.makuru.makurufx.R;
 import za.co.makuru.makurufx.data.db.model.Currency;
 import za.co.makuru.makurufx.data.db.model.PersistRate;
 import za.co.makuru.makurufx.di.component.ActivityComponent;
+import za.co.makuru.makurufx.ui.MakuruFxActivity;
 import za.co.makuru.makurufx.ui.base.BaseFragment;
 import za.co.makuru.makurufx.utils.AppUtils;
 
@@ -88,6 +90,12 @@ public class CurrencyDetailFragment extends BaseFragment implements CurrencyDeta
         return view;
     }
 
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        ((MakuruFxActivity)getActivity()).getSupportActionBar().hide();
+
+    }
 
     @Override
     public void onAttach(Context context) {
@@ -97,6 +105,13 @@ public class CurrencyDetailFragment extends BaseFragment implements CurrencyDeta
     @Override
     public void onDetach() {
         super.onDetach();
+    }
+
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        ((MakuruFxActivity)getActivity()).getSupportActionBar().show();
     }
 
     @Override

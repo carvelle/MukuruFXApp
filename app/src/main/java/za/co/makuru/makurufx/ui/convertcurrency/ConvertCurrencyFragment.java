@@ -20,6 +20,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import za.co.makuru.makurufx.R;
 import za.co.makuru.makurufx.di.component.ActivityComponent;
+import za.co.makuru.makurufx.ui.MakuruFxActivity;
 import za.co.makuru.makurufx.ui.base.BaseFragment;
 
 
@@ -67,6 +68,17 @@ public class ConvertCurrencyFragment extends BaseFragment implements ConvertCurr
 
         mContext = view.getContext();
         return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        ((MakuruFxActivity)getActivity()).getSupportActionBar().hide();
+    }
+    @Override
+    public void onStop() {
+        super.onStop();
+        ((MakuruFxActivity)getActivity()).getSupportActionBar().show();
     }
 
     @Override

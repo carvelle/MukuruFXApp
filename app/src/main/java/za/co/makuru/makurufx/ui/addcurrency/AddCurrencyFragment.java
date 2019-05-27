@@ -18,6 +18,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import za.co.makuru.makurufx.R;
 import za.co.makuru.makurufx.di.component.ActivityComponent;
+import za.co.makuru.makurufx.ui.MakuruFxActivity;
 import za.co.makuru.makurufx.ui.base.BaseFragment;
 
 
@@ -75,6 +76,17 @@ public class AddCurrencyFragment extends BaseFragment implements AddCurrencyView
     @Override
     public void onDetach() {
         super.onDetach();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        ((MakuruFxActivity)getActivity()).getSupportActionBar().hide();
+    }
+    @Override
+    public void onStop() {
+        super.onStop();
+        ((MakuruFxActivity)getActivity()).getSupportActionBar().show();
     }
 
     @Override
